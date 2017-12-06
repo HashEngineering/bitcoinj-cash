@@ -20,19 +20,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.bitcoincashj</groupId>
-        <artifactId>bitcoincashj-parent</artifactId>
+        <groupId>cash.bitcoinj</groupId>
+        <artifactId>bitcoinj-parent</artifactId>
         <version>0.14.5</version>
     </parent>
 
-    <artifactId>bitcoincashj-core</artifactId>
+    <artifactId>bitcoinj-core</artifactId>
 
-    <name>bitcoincashj</name>
+    <name>bitcoinj</name>
     <description>A Java Bitcoin library</description>
 
     <packaging>jar</packaging>
 
-    <url>https://bitcoinj.github.io</url>
+    <url>https://bitcoinj.cash</url>
 
     <licenses>
         <license>
@@ -45,8 +45,8 @@
     <!-- Dummy block to make Maven Central happy: authors list is in AUTHORS -->
     <developers>
         <developer>
-            <name>The bitcoinj team</name>
-            <email>bitcoinj@googlegroups.com</email>
+            <name>The bitcoinj.cash team</name>
+            <email>bitcoinj-cash@googlegroups.com</email>
         </developer>
     </developers>
 

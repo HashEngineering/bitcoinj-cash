@@ -4,14 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.bitcoincashj</groupId>
-        <artifactId>bitcoincashj-parent</artifactId>
+        <groupId>cash.bitcoinj</groupId>
+        <artifactId>bitcoinj-parent</artifactId>
         <version>0.14.5</version>
     </parent>
 
     <artifactId>wallettemplate</artifactId>
 
-    <name>bitcoincashj Wallet-Template</name>
+    <name>bitcoinj.cash Wallet-Template</name>
 
     <build>
         <plugins>
