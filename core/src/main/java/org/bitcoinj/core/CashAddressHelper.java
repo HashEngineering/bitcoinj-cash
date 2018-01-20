@@ -357,7 +357,7 @@ public class CashAddressHelper {
         int x = 0;
         for (int i = 0; i < it.length; ++i)
         {
-            acc = ((acc << frombits) | it[i]) & max_acc;
+            acc = ((acc << frombits) | (it[i]&0xff)) & max_acc;
             bits += frombits;
             while (bits >= tobits) {
                 bits -= tobits;
