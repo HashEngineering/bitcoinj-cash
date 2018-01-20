@@ -539,4 +539,9 @@ public abstract class NetworkParameters {
             return bitcoinProtocol;
         }
     }
+
+    protected String cashAddrPrefix;
+    public String getCashAddrPrefix() {
+        return cashAddrPrefix;
+    }
 }
