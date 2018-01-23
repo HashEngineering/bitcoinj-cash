@@ -6,7 +6,7 @@
     <parent>
         <groupId>cash.bitcoinj</groupId>
         <artifactId>bitcoinj-parent</artifactId>
-        <version>0.14.5.1</version>
+        <version>0.14-SNAPSHOT</version>
     </parent>
 
     <artifactId>orchid</artifactId>
