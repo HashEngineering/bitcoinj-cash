@@ -65,7 +65,7 @@ public abstract class AbstractBitcoinNetParams extends NetworkParameters {
     	final BlockStore blockStore, AbstractBlockChain blockChain) throws VerificationException, BlockStoreException {
         Block prev = storedPrev.getHeader();
 
-        if (storedPrev.getHeight() +1 >= daaHeight) {
+        if (storedPrev.getHeight() >= daaHeight) {
             checkNextCashWorkRequired(storedPrev, nextBlock, blockStore);
             return;
         }
@@ -88,9 +88,8 @@ public abstract class AbstractBitcoinNetParams extends NetworkParameters {
             for (int i = 0; i < 6; i++) {
                 if (cursor == null) {
                     return;
-                    // This should never happen. If it does, it means we are following an incorrect or busted chain.
-                    //throw new VerificationException(
-                      //      "We did not find a way back to the genesis block.");
+                    // There are not enough blocks in the blockStore to verify the difficulty due to the use of checkpoints
+                    // Return as if the difficulty was verified.
                 }
                 cursor = blockStore.get(cursor.getHeader().getPrevBlockHash());
             }
@@ -255,6 +254,7 @@ public abstract class AbstractBitcoinNetParams extends NetworkParameters {
  */
     StoredBlock GetSuitableBlock(StoredBlock pindex, BlockStore blockStore) throws BlockStoreException{
         //assert(pindex->nHeight >= 3);
+        Preconditions.checkState(pindex.getHeight() >= 3);
 
         /**
          * In order to avoid a block is a very skewed timestamp to have too much
@@ -264,7 +264,11 @@ public abstract class AbstractBitcoinNetParams extends NetworkParameters {
         StoredBlock blocks[] = new StoredBlock[3];
         blocks[2] = pindex;
         blocks[1] = pindex.getPrev(blockStore);
+        if(blocks[1] == null)
+            throw new BlockStoreException("Not enough blocks in blockStore to calculate difficulty");
         blocks[0] = blocks[1].getPrev(blockStore);
+        if(blocks[0] == null)
+            throw new BlockStoreException("Not enough blocks in blockStore to calculate difficulty");
 
         // Sorting network.
         if (blocks[0].getHeader().getTimeSeconds() > blocks[2].getHeader().getTimeSeconds()) {
@@ -333,7 +337,7 @@ public abstract class AbstractBitcoinNetParams extends NetworkParameters {
             {
                 pindexFirst = pindexFirst.getPrev(blockStore);
                 if(pindexFirst == null)
-                    return;
+                    return; //Not enough blocks in the blockchain to calculate difficulty
             }
 
             pindexFirst = GetSuitableBlock(pindexFirst, blockStore);
